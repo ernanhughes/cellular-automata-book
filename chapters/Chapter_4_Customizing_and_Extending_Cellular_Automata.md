@@ -191,4 +191,3 @@ Stochastic cellular automata can be used for:
 
 In this chapter, we explored ways to customize cellular automata, including defining custom rules, extending to multi-dimensional grids, and introducing stochastic elements. These techniques empower programmers to simulate increasingly realistic and complex systems. Next, we’ll delve into practical applications of cellular automata, demonstrating their power in solving real-world problems.
 
-Let me know if you’d like additional examples or sections expanded!

@@ -251,7 +251,7 @@ visualize_grid(grid.get_state(), title="Prey-Predator Ecosystem")
 
 ### Summary
 
-This chapter demonstrated how to build a modular cellular automata framework, test its components, and use it for practical applications like ecosystem simulation. In the next chapter, we’ll explore advanced applications and cutting-edge research in cellular automata. Let me know if you’d like additional enhancements!
+This chapter demonstrated how to build a modular cellular automata framework, test its components, and use it for practical applications like ecosystem simulation. In the next chapter, we’ll explore advanced applications and cutting-edge research in cellular automata. 
 
 -----
 

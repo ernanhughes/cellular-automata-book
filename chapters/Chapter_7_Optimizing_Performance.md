@@ -218,7 +218,7 @@ plt.show()
 
 ### Summary
 
-This chapter demonstrated techniques to optimize cellular automata for large-scale and high-performance simulations. By leveraging NumPy, sparse matrices, parallel processing, and GPU acceleration, programmers can scale simulations efficiently. In the next chapter, we’ll discuss how to develop reusable frameworks for cellular automata. Let me know if you’d like further refinements or additional examples!
+This chapter demonstrated techniques to optimize cellular automata for large-scale and high-performance simulations. By leveraging NumPy, sparse matrices, parallel processing, and GPU acceleration, programmers can scale simulations efficiently. In the next chapter, we’ll discuss how to develop reusable frameworks for cellular automata.  if you’d like further refinements or additional examples!
 
 
 

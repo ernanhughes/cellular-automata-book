@@ -224,7 +224,7 @@ plt.show()
 
 ### Summary
 
-This chapter provided hands-on projects to apply cellular automata concepts in practical scenarios. From simulating traffic to generating terrains and interactive tools, these examples showcase the versatility of CAs. These projects serve as inspiration for your own explorations in art, simulation, and game design. Let me know if you'd like to refine or expand on any of these projects!I
+This chapter provided hands-on projects to apply cellular automata concepts in practical scenarios. From simulating traffic to generating terrains and interactive tools, these examples showcase the versatility of CAs. These projects serve as inspiration for your own explorations in art, simulation, and game design. 
 
 
 --------------

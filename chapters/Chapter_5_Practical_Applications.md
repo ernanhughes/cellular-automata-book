@@ -220,4 +220,4 @@ for step, g in enumerate(forest_fire(grid, steps=10)):
 
 ### Summary
 
-This chapter demonstrates how cellular automata can be applied to real-world problems, from modeling natural systems to solving algorithmic challenges. The examples provided serve as a foundation for building more complex and tailored systems. In the next chapter, we’ll explore cellular automata in generative design and art. Let me know if you’d like any refinements!
+This chapter demonstrates how cellular automata can be applied to real-world problems, from modeling natural systems to solving algorithmic challenges. The examples provided serve as a foundation for building more complex and tailored systems. In the next chapter, we’ll explore cellular automata in generative design and art.
