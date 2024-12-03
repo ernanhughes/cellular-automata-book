@@ -87,11 +87,6 @@ visualize_eca(eca_grid, rule_number)
 
 ---
 
-### Analyzing Patterns and Properties
-
-1. **Stable Patterns**: Rules like 0 and 255 lead to stable configurations (e.g., all cells are off or on).
-2. **Chaotic Behavior**: Rules like 30 and 45 produce chaotic, unpredictable patterns.
-3. **Complexity and Universality**: Rule 110 is Turing complete, meaning it can simulate any computation given enough time and space.
 
 #### Further Reading:
 - [Stephen Wolfram's "A New Kind of Science"](https://www.wolframscience.com/) explores the universality and complexity of elementary rules.
