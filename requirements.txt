@@ -11,3 +11,6 @@ pypandoc
 nbformat
 tqdm
 transformers 
+imageio
+imageio-ffmpeg
+moviepy
