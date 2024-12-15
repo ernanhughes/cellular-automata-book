@@ -484,6 +484,143 @@ While both methods use DFA under the hood, **pattern matching** is about detecti
 ### 4.3 Protocol Design
 DFAs model communication protocols by defining allowable sequences of events.
 
+
+### Protocol Design Using DFA
+
+**Protocol design** refers to defining rules for communication between systems or components. A DFA can model protocols by representing states in a communication process and transitions based on messages or events. This is different from **pattern matching** and **lexical analysis** because the focus here is on managing valid sequences of communication events, not recognizing patterns or tokenizing input.
+
+---
+
+### **How Protocol Design Differs**
+
+| Aspect              | Pattern Matching                   | Lexical Analysis                        | Protocol Design                           |
+|---------------------|-------------------------------------|-----------------------------------------|-------------------------------------------|
+| **Purpose**         | Match specific patterns in a string. | Tokenize input into meaningful components. | Define and enforce valid communication sequences. |
+| **Input**           | A single string.                   | A stream of characters.                 | A sequence of events/messages.            |
+| **Output**          | Match/No Match.                   | Tokens with types.                      | Valid/Invalid protocol sequences.         |
+| **Use Case**        | String validation, substring detection. | Compiler front-ends, data parsers.      | Communication protocols, finite state control systems. |
+
+---
+
+### **Example: Simple Handshake Protocol**
+
+Let’s design a handshake protocol with three states:
+1. **`WAITING`**: Waiting for an initial handshake request (`HELLO`).
+2. **`HANDSHAKE`**: Expecting a response to the handshake (`ACK`).
+3. **`CONNECTED`**: The protocol completes successfully when the handshake is acknowledged.
+
+#### DFA for the Protocol
+- **States**: `WAITING`, `HANDSHAKE`, `CONNECTED`.
+- **Alphabet**: `{HELLO, ACK, RESET}`.
+- **Start State**: `WAITING`.
+- **Accept State**: `CONNECTED`.
+
+---
+
+#### **Python Code**
+
+```python
+class ProtocolDFA:
+    def __init__(self, states, alphabet, transitions, start_state, accept_states):
+        self.states = states
+        self.alphabet = alphabet
+        self.transitions = transitions
+        self.start_state = start_state
+        self.accept_states = accept_states
+        self.current_state = start_state
+
+    def process_event(self, event):
+        if event in self.alphabet:
+            self.current_state = self.transitions[self.current_state].get(event, "ERROR")
+        else:
+            self.current_state = "ERROR"
+        return self.current_state
+
+    def is_valid_protocol(self):
+        return self.current_state in self.accept_states
+
+def build_handshake_protocol_dfa():
+    states = {"WAITING", "HANDSHAKE", "CONNECTED", "ERROR"}
+    alphabet = {"HELLO", "ACK", "RESET"}
+    start_state = "WAITING"
+    accept_states = {"CONNECTED"}
+
+    transitions = {
+        "WAITING": {"HELLO": "HANDSHAKE", "RESET": "WAITING"},
+        "HANDSHAKE": {"ACK": "CONNECTED", "RESET": "WAITING"},
+        "CONNECTED": {"RESET": "WAITING"},
+        "ERROR": {}
+    }
+
+    return ProtocolDFA(states, alphabet, transitions, start_state, accept_states)
+
+# Example usage
+if __name__ == "__main__":
+    protocol_dfa = build_handshake_protocol_dfa()
+    sequence = ["HELLO", "ACK"]
+
+    print("Processing handshake protocol...")
+    for event in sequence:
+        current_state = protocol_dfa.process_event(event)
+        print(f"Event: {event}, Current State: {current_state}")
+
+    if protocol_dfa.is_valid_protocol():
+        print("Protocol sequence is valid. Connection established!")
+    else:
+        print("Invalid protocol sequence.")
+```
+
+---
+
+#### **How It Works**
+1. **States**: Represent stages in the protocol (`WAITING`, `HANDSHAKE`, `CONNECTED`).
+2. **Transitions**: Define how the DFA moves between states based on input events.
+3. **Processing**: The DFA processes each event and transitions accordingly.
+4. **Validation**: If the DFA ends in an accept state (`CONNECTED`), the protocol is valid.
+
+---
+
+#### **Output**
+
+For the input sequence `["HELLO", "ACK"]`:
+
+```
+Processing handshake protocol...
+Event: HELLO, Current State: HANDSHAKE
+Event: ACK, Current State: CONNECTED
+Protocol sequence is valid. Connection established!
+```
+
+For an invalid sequence, e.g., `["HELLO", "RESET", "ACK"]`:
+
+```
+Processing handshake protocol...
+Event: HELLO, Current State: HANDSHAKE
+Event: RESET, Current State: WAITING
+Event: ACK, Current State: ERROR
+Invalid protocol sequence.
+```
+
+---
+
+### **Contrast with Pattern Matching and Lexical Analysis**
+
+| Aspect              | DFA for Pattern Matching          | DFA for Lexical Analysis               | DFA for Protocol Design                  |
+|---------------------|-------------------------------------|-----------------------------------------|-------------------------------------------|
+| **Input Unit**      | Single string.                    | Stream of characters.                  | Sequence of events.                       |
+| **Output**          | Match/No Match.                  | Tokens with types.                      | Valid/Invalid sequence of events.         |
+| **States Purpose**  | Represent matching progress.       | Represent tokenization rules.           | Represent communication stages.           |
+| **Use Case**        | Validate a pattern.               | Parse and tokenize input.               | Manage valid communication protocols.     |
+
+---
+
+### **Applications of Protocol DFA**
+- **Network Protocols**: Ensuring correct message order in TCP, HTTP, etc.
+- **State Machines**: Modeling device states like in IoT systems.
+- **Human-Machine Interaction**: Enforcing valid command sequences.
+
+By modeling protocol rules as a DFA, we can design robust systems that enforce communication correctness and handle errors gracefully.
+
 ---
 
 
