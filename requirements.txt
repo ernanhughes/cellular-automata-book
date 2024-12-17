@@ -14,3 +14,4 @@ transformers
 imageio
 imageio-ffmpeg
 moviepy
+scikit-learn
