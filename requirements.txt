@@ -15,3 +15,4 @@ imageio
 imageio-ffmpeg
 moviepy
 scikit-learn
+noise

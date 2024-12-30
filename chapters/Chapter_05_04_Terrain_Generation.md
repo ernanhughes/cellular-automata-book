@@ -161,3 +161,102 @@ generate_terrain(
 ## Conclusion
 
 By using cellular automata, we can generate diverse terrains suitable for games, complete with water bodies and mountains. This approach demonstrates the flexibility of cellular automata for procedural generation tasks. In the next chapter, we’ll explore more advanced features, including biome generation and texture mapping.
+
+
+
+Certainly, here's a Jupyter Notebook chapter demonstrating terrain generation using cellular automata in Python:
+
+**Chapter 2: Terrain Generation with Cellular Automata**
+
+**2.1 Introduction**
+
+In this chapter, we'll extend the concept of cellular automata to generate realistic-looking terrain, such as mountains, hills, and plains. We'll adapt the basic principles of cellular automata to simulate geological processes like erosion and deposition.
+
+**2.2 Terrain Generation Algorithm**
+
+1. **Initialization:**
+   - Create a 2D grid of cells, initially filling it with random height values. This represents the initial terrain.
+
+2. **Erosion and Deposition:**
+   - Iterate through each cell in the grid:
+     - Calculate the **height difference** between the current cell and its neighbors.
+     - If the height difference exceeds a threshold:
+       - **Erosion:** If the current cell is higher than its neighbors, "erode" it by reducing its height slightly.
+       - **Deposition:** If the current cell is lower than its neighbors, "deposit" material onto it by increasing its height slightly.
+
+3. **Repeat:**
+   - Repeat the erosion and deposition steps multiple times to gradually shape the terrain.
+
+**2.3 Python Implementation**
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def generate_terrain(grid_size, iterations, erosion_rate):
+  """
+  Generates terrain using cellular automata.
+
+  Args:
+    grid_size: The size of the grid (grid_size x grid_size).
+    iterations: The number of erosion/deposition iterations.
+    erosion_rate: The rate of height change during erosion/deposition.
+
+  Returns:
+    A 2D numpy array representing the terrain heightmap.
+  """
+
+  # Initialize the grid with random heights
+  terrain = np.random.rand(grid_size, grid_size) 
+
+  # Perform erosion and deposition iterations
+  for _ in range(iterations):
+    new_terrain = terrain.copy()
+    for i in range(1, grid_size - 1):
+      for j in range(1, grid_size - 1):
+        neighbors = terrain[i-1:i+2, j-1:j+2]
+        avg_height = np.mean(neighbors)
+        height_diff = terrain[i, j] - avg_height
+
+        if height_diff > erosion_rate: 
+          new_terrain[i, j] -= erosion_rate  # Erosion
+        elif height_diff < -erosion_rate:
+          new_terrain[i, j] += erosion_rate  # Deposition 
+
+    terrain = new_terrain
+
+  return terrain
+
+# Generate terrain
+grid_size = 100
+iterations = 200
+erosion_rate = 0.01
+terrain_map = generate_terrain(grid_size, iterations, erosion_rate)
+
+# Visualize the terrain
+plt.imshow(terrain_map, cmap='terrain') 
+plt.title("Terrain Generated with Cellular Automata")
+plt.axis('off')
+plt.show()
+```
+
+**2.4 Experimentation**
+
+* **`iterations`:** Increase the number of iterations for more pronounced terrain features.
+* **`erosion_rate`:** Adjust the erosion rate to control the speed and intensity of terrain shaping. Higher values create more dramatic changes.
+* **Initial grid:** Experiment with different initial height distributions (e.g., Gaussian noise) for diverse terrain types.
+* **Neighboring cells:** Consider different ways to define neighboring cells (e.g., diagonal neighbors) to influence the shape of the terrain.
+
+**2.5 Conclusion**
+
+This chapter demonstrates a basic approach to terrain generation using cellular automata. By carefully adjusting the parameters and incorporating more sophisticated rules, you can create a wide range of realistic-looking terrains, from gentle rolling hills to rugged mountain ranges. 
+
+**Note:** This is a simplified example. For more advanced terrain generation, you can:
+
+* **Incorporate noise:** Add noise to the terrain during or after the simulation to introduce more irregularity.
+* **Simulate water flow:** Model the flow of water across the terrain to create river valleys and deltas.
+* **Add geological features:** Introduce features like volcanoes, faults, and tectonic plate movements to further enhance the realism.
+
+This provides a starting point for exploring the creative possibilities of terrain generation with cellular automata in your game development or other projects.
+
+I hope this enhanced chapter effectively demonstrates terrain generation using cellular automata in Python!
